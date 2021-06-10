@@ -1,28 +1,38 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
+  <main class="home">
+    <h3>Welcome To Hangman! Ready to play?</h3>
+    <component @nextStep="changeStep" :is="selectedComponent"> </component>
+  </main>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import UserControls from "../components/UserControls.vue";
+import GameBoard from "../components/GameBoard.vue";
 
 export default {
   name: "Home",
   components: {
-    HelloWorld,
+    UserControls,
+    GameBoard,
+  },
+  data() {
+    return {
+      selectedComponent: "UserControls",
+    };
   },
   async created() {
-    await this.getData();
+    await this.getWords();
   },
   methods: {
-    async getData(){
-      let data = await fetch('api/v1/words')
-      data = await data.json();
-      console.log(data);
-    }
-  }
+    async getWords() {
+      let words = await fetch("api/v1/words");
+      words = await words.json();
+      this.$store.commit("setWords", words);
+    },
+
+    changeStep(component) {
+      this.selectedComponent = component;
+    },
+  },
 };
 </script>

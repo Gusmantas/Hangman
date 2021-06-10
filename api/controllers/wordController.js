@@ -5,7 +5,7 @@ const db = new sqlite3.Database(path.join(__dirname, "../hangman-database.db"));
 
 const getWords = (req, res) => {
   let query = /*sql*/ `SELECT * FROM words`
-  db.get(query, [], (err, results) => {
+  db.all(query, [], (err, results) => {
     res.json(results);
   });
 }
