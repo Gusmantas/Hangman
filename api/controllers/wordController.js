@@ -3,11 +3,10 @@ const path = require("path")
 
 const db = new sqlite3.Database(path.join(__dirname, "../hangman-database.db"));
 
-const getWordById = (req, res) => {
-  let query = /*sql*/ `SELECT * FROM words WHERE id = $wordId`
-  let params = { $wordId: req.params.wordId };
-  db.get(query, params, (err, result) => {
-    res.json(result.word);
+const getWords = (req, res) => {
+  let query = /*sql*/ `SELECT * FROM words`
+  db.get(query, [], (err, results) => {
+    res.json(results);
   });
 }
 
@@ -19,4 +18,4 @@ const createNewWord = (req, res) => {
   })
 }
 
-module.exports = { getWordById, createNewWord }
+module.exports = { getWords, createNewWord }
