@@ -6,7 +6,7 @@
         <h1 v-for="(value, i) in gameWordLetters" :key="i">
           {{ value }}
         </h1>
-        <button @click="displayHint">Hint</button>
+        <button v-if="gameWord.hint" @click="displayHint">Hint</button>
       </div>
       <keyboard @validateLetter="validateLetter" />
     </div>
