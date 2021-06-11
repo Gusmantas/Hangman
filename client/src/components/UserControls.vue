@@ -14,10 +14,20 @@
       <h3 id="info">Enter your own word or choose a random existing word:</h3>
       <label for="input-word">Your Word: </label>
       <input v-model="enteredWord.word" type="text" name="input-word" />
+      <h3>{{ validationError }}</h3>
       <label for="hint">Hint about the word:</label>
-      <input v-model="enteredWord.hint" type="text" placeholder="hint">
+      <input
+        v-model="enteredWord.hint"
+        type="text"
+        placeholder="Hint (Optional)"
+      />
       <button @click="getRandomWord">Random Word</button>
-      <button :disabled="!enteredWord.word && !randomWord.word" @click="startGame">Start Game!</button>
+      <button
+        :disabled="!enteredWord.word && !randomWord.word"
+        @click="startGame"
+      >
+        Start Game!
+      </button>
     </div>
   </div>
 </template>
@@ -29,12 +39,13 @@ export default {
       username: "",
       enteredWord: {
         word: null,
-        hint: null
+        hint: null,
       },
-      randomWord:{
+      randomWord: {
         word: null,
-        hint: null
+        hint: null,
       },
+      validationError: "",
     };
   },
 
@@ -54,17 +65,33 @@ export default {
     startGame() {
       this.$store.commit("setUsername", this.username);
       let gameWord = {
-        word: '',
-        hint: '',
+        word: "",
+        hint: "",
       };
-      this.enteredWord.word ? (gameWord = this.enteredWord) : (gameWord = this.randomWord);
+
+      if (this.enteredWord.word) {
+        if (!this.validateInput(this.enteredWord.word)) {
+          return;
+        }
+        gameWord = this.enteredWord;
+      } else gameWord = this.randomWord;
+      
       this.$store.commit("setGameWord", gameWord);
-      console.log(gameWord);
       this.changeStep();
     },
 
     changeStep() {
       this.$emit("nextStep", "GameBoard");
+    },
+
+    validateInput(word) {
+      let letters = /^[a-z]*$/i;
+      if (!word.match(letters)) {
+        this.validationError = "Only letters are allowed!";
+        this.enteredWord.word = null;
+        return false;
+      }
+      return true;
     },
   },
 };
