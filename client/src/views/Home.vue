@@ -20,16 +20,10 @@ export default {
       selectedComponent: "UserControls",
     };
   },
-  async created() {
-    await this.getWords();
+  created() {
+    this.$store.dispatch("getWords");
   },
   methods: {
-    async getWords() {
-      let words = await fetch("api/v1/words");
-      words = await words.json();
-      this.$store.commit("setWords", words);
-    },
-
     changeStep(component) {
       this.selectedComponent = component;
     },

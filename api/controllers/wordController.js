@@ -11,8 +11,11 @@ const getWords = (req, res) => {
 }
 
 const createNewWord = (req, res) => {
-  const query = /*sql*/ `INSERT INTO words(word) VALUES($word)`;
-  const params = { $word: req.body.word }
+  const query = /*sql*/ `INSERT INTO words(word, hint) VALUES($word, $hint)`;
+  const params = {
+    $word: req.body.word,
+    $hint: req.body.hint
+  }
   db.run(query, params, () => {
     res.json({ message: "Word added successfully", params })
   })

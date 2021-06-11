@@ -62,7 +62,7 @@ export default {
       this.enteredWord.hint = null;
     },
 
-    startGame() {
+    async startGame() {
       this.$store.commit("setUsername", this.username);
       let gameWord = {
         word: "",
@@ -74,8 +74,10 @@ export default {
           return;
         }
         gameWord = this.enteredWord;
+        // Saving the entered word object in databse so these words can be randomly
+        // used when someone plays the game.
+        await this.postWord(gameWord);
       } else gameWord = this.randomWord;
-      
       this.$store.commit("setGameWord", gameWord);
       this.changeStep();
     },
@@ -92,6 +94,16 @@ export default {
         return false;
       }
       return true;
+    },
+
+    async postWord(word) {
+      let postWord = await fetch("api/v1/words", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(word),
+      });
+      postWord = await postWord.json();
+      console.log(postWord);
     },
   },
 };

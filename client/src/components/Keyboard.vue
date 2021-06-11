@@ -1,6 +1,10 @@
 <template>
   <div id="letters">
-    <button @click="validateLetter($event,letter)" v-for="letter in alphabet" :key="letter">
+    <button
+      @click="validateLetter($event, letter)"
+      v-for="letter in alphabet"
+      :key="letter"
+    >
       {{ letter.toUpperCase() }}
     </button>
   </div>
@@ -9,10 +13,10 @@
 <script>
 export default {
   methods: {
-    validateLetter(event, letter){
+    validateLetter(event, letter) {
       event.target.disabled = true;
-      this.$emit("validateLetter", letter)
-    }
+      this.$emit("validateLetter", letter);
+    },
   },
   data() {
     return {
@@ -53,13 +57,13 @@ export default {
 #letters {
   display: flex;
   justify-content: center;
-  button{
+  button {
     margin: 0 5px;
     padding: 15px;
     border: none;
     border-radius: 5px;
 
-    &:hover{
+    &:hover {
       background-color: rgb(197, 209, 22);
     }
   }

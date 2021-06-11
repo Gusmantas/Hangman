@@ -8,19 +8,25 @@ export default createStore({
     gameWord: ''
   },
   mutations: {
-    setWords(state, words){
+    setWords(state, words) {
       state.words = words
     },
-    setScores(state, scores){
+    setScores(state, scores) {
       state.scores = scores
     },
-    setUsername(state, username){
+    setUsername(state, username) {
       state.username = username
     },
-    setGameWord(state, word){
+    setGameWord(state, word) {
       state.gameWord = word
     }
   },
-  actions: {},
+  actions: {
+    async getWords(context) {
+      let words = await fetch("api/v1/words");
+      words = await words.json();
+      context.commit("setWords", words);
+    },
+  },
   modules: {},
 });

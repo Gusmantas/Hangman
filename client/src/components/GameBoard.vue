@@ -63,7 +63,7 @@ export default {
 
       if (!this.gameWordLetters.includes("_")) this.playerHasWon = true;
     },
-    displayHint(){
+    displayHint() {
       console.log(this.gameWord.hint);
     },
     changeStep() {
