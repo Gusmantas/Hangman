@@ -1,7 +1,7 @@
 <template>
   <main>
-    <div v-if="!playerHasWon">
-      <h1>GameBoard</h1>
+    <h1>Guesses left: {{ guessesLeft }}</h1>
+    <div v-if="!playerHasWon && guessesLeft !== 0">
       <div id="secret-word">
         <h1 v-for="(value, i) in gameWordLetters" :key="i">
           {{ value }}
@@ -11,6 +11,11 @@
     </div>
     <span v-if="playerHasWon">
       <h3>Congrats! You win!</h3>
+      <button @click="changeStep">Play Again?</button>
+    </span>
+    <span v-if="guessesLeft === 0">
+      <h1>Oh no! you lost!</h1>
+      <h3>Secret word was: {{ gameWord.toUpperCase() }}</h3>
       <button @click="changeStep">Play Again?</button>
     </span>
   </main>
@@ -28,6 +33,7 @@ export default {
       playerGuess: "",
       gameWordLetters: [],
       playerHasWon: false,
+      guessesLeft: 10,
     };
   },
   computed: {
@@ -60,9 +66,9 @@ export default {
     },
 
     decreaseChances() {
-      console.log("fail");
+      this.guessesLeft--;
     },
-     changeStep() {
+    changeStep() {
       this.$emit("nextStep", "UserControls");
     },
   },
