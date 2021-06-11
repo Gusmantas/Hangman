@@ -4,7 +4,7 @@ export default createStore({
   state: {
     words: [],
     scores: [],
-    username: '',
+    playerName: '',
     gameWord: ''
   },
   mutations: {
@@ -14,8 +14,8 @@ export default createStore({
     setScores(state, scores) {
       state.scores = scores
     },
-    setUsername(state, username) {
-      state.username = username
+    setPlayerName(state, name) {
+      state.playerName = name
     },
     setGameWord(state, word) {
       state.gameWord = word

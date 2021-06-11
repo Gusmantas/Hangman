@@ -1,17 +1,19 @@
 <template>
   <main>
     <h1>Guesses left: {{ guessesLeft }}</h1>
-    <div v-if="!playerHasWon && guessesLeft !== 0">
+    <div id="content-wrapper" v-if="!playerHasWon && guessesLeft !== 0">
       <div id="secret-word">
-        <h1 v-for="(value, i) in gameWordLetters" :key="i">
-          {{ value }}
+        <h1 v-for="(underscore, i) in maskedLetters" :key="i">
+          {{ underscore }}
         </h1>
-        <button v-if="gameWord.hint" @click="displayHint">Hint</button>
       </div>
+        <button v-if="gameWord.hint" @click="displayHint">Hint</button>
+        <h3>{{hint}}</h3>
       <keyboard @validateLetter="validateLetter" />
     </div>
     <span v-if="playerHasWon">
       <h3>Congrats! You win!</h3>
+      <h3>Secret word was: {{ gameWord.word.toUpperCase() }}</h3>
       <button @click="changeStep">Play Again?</button>
     </span>
     <span v-if="guessesLeft === 0">
@@ -32,9 +34,10 @@ export default {
   data() {
     return {
       playerGuess: "",
-      gameWordLetters: [],
+      maskedLetters: [],
       playerHasWon: false,
       guessesLeft: 10,
+      hint: '',
     };
   },
   computed: {
@@ -43,7 +46,7 @@ export default {
     },
   },
   created() {
-    this.gameWordLetters = [...this.gameWord.word].map(() => "_");
+    this.maskedLetters = [...this.gameWord.word].map(() => "_");
   },
   methods: {
     validateLetter(letter) {
@@ -58,12 +61,13 @@ export default {
         if (this.gameWord.word[i] === playerGuess) indices.push(i);
       }
       for (let indice of indices) {
-        this.gameWordLetters[indice] = playerGuess.toUpperCase();
+        this.maskedLetters[indice] = playerGuess.toUpperCase();
       }
 
-      if (!this.gameWordLetters.includes("_")) this.playerHasWon = true;
+      if (!this.maskedLetters.includes("_")) this.playerHasWon = true;
     },
     displayHint() {
+      this.hint = this.gameWord.hint;
       console.log(this.gameWord.hint);
     },
     changeStep() {
@@ -81,4 +85,5 @@ export default {
     padding: 15px;
   }
 }
+
 </style>

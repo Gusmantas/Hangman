@@ -1,6 +1,7 @@
 <template>
-  <main class="home">
-    <h3>Welcome To Hangman! Ready to play?</h3>
+  <main>
+    <header>Are you ready to get hanged?</header>
+    <hr />
     <component @nextStep="changeStep" :is="selectedComponent"> </component>
   </main>
 </template>
@@ -8,16 +9,18 @@
 <script>
 import UserControls from "../components/UserControls.vue";
 import GameBoard from "../components/GameBoard.vue";
+import PlayerNameInput from "../components/PlayerNameInput.vue"
 
 export default {
   name: "Home",
   components: {
     UserControls,
     GameBoard,
+    PlayerNameInput
   },
   data() {
     return {
-      selectedComponent: "UserControls",
+      selectedComponent: "PlayerNameInput",
     };
   },
   created() {
@@ -30,3 +33,13 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+  header{
+    font-size: 1.3em;
+    font-weight: bold;
+  }
+  hr{
+    margin-bottom: 30px;
+  }
+</style>

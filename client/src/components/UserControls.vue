@@ -1,16 +1,6 @@
 <template>
-  <div id="content">
-    <div id="username-input">
-      <label for="username">Pleas enter your player name: </label>
-      <input
-        v-model="username"
-        name="username"
-        type="text"
-        placeholder="User name..."
-      />
-    </div>
-
-    <div v-if="username">
+  <main>
+    <div>
       <h3 id="info">Enter your own word or choose a random existing word:</h3>
       <label for="input-word">Your Word: </label>
       <input v-model="enteredWord.word" type="text" name="input-word" />
@@ -29,14 +19,13 @@
         Start Game!
       </button>
     </div>
-  </div>
+  </main>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      username: "",
       enteredWord: {
         word: null,
         hint: null,
@@ -63,7 +52,6 @@ export default {
     },
 
     async startGame() {
-      this.$store.commit("setUsername", this.username);
       let gameWord = {
         word: "",
         hint: "",
@@ -109,5 +97,16 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+  #username-input{
+    label{
+      font-weight: 600px;
+    }
+    input{
+      width: 15%;
+      padding: 5px;
+      border-radius: 3px;
+      border: 1px solid;
+    }
+  }
 </style>
