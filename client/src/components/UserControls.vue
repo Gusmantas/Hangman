@@ -15,7 +15,7 @@
       <label for="input-word">Your Word: </label>
       <input v-model="word" type="text" name="input-word" />
       <button @click="getRandomWord">Random Word</button>
-      <button @click="startGame">Start Game!</button>
+      <button :disabled="!word && !randomWord" @click="startGame">Start Game!</button>
     </div>
   </div>
 </template>
@@ -46,7 +46,7 @@ export default {
       this.$store.commit("setUsername", this.username);
       let gameWord = "";
       this.word ? (gameWord = this.word) : (gameWord = this.randomWord);
-      this.$store.commit("setGameWord", gameWord);
+      this.$store.commit("setGameWord", gameWord.toLowerCase());
       this.changeStep();
     },
 
