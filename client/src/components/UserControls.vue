@@ -13,9 +13,11 @@
     <div v-if="username">
       <h3 id="info">Enter your own word or choose a random existing word:</h3>
       <label for="input-word">Your Word: </label>
-      <input v-model="word" type="text" name="input-word" />
+      <input v-model="enteredWord.word" type="text" name="input-word" />
+      <label for="hint">Hint about the word:</label>
+      <input v-model="enteredWord.hint" type="text" placeholder="hint">
       <button @click="getRandomWord">Random Word</button>
-      <button :disabled="!word && !randomWord" @click="startGame">Start Game!</button>
+      <button :disabled="!enteredWord.word && !randomWord.word" @click="startGame">Start Game!</button>
     </div>
   </div>
 </template>
@@ -25,8 +27,14 @@ export default {
   data() {
     return {
       username: "",
-      word: null,
-      randomWord: null,
+      enteredWord: {
+        word: null,
+        hint: null
+      },
+      randomWord:{
+        word: null,
+        hint: null
+      },
     };
   },
 
@@ -38,15 +46,20 @@ export default {
   methods: {
     getRandomWord() {
       const randomWordIndex = Math.floor(Math.random() * this.words.length);
-      this.randomWord = this.words[randomWordIndex].word;
-      this.word = null;
+      this.randomWord = this.words[randomWordIndex];
+      this.enteredWord.word = null;
+      this.enteredWord.hint = null;
     },
 
     startGame() {
       this.$store.commit("setUsername", this.username);
-      let gameWord = "";
-      this.word ? (gameWord = this.word) : (gameWord = this.randomWord);
-      this.$store.commit("setGameWord", gameWord.toLowerCase());
+      let gameWord = {
+        word: '',
+        hint: '',
+      };
+      this.enteredWord.word ? (gameWord = this.enteredWord) : (gameWord = this.randomWord);
+      this.$store.commit("setGameWord", gameWord);
+      console.log(gameWord);
       this.changeStep();
     },
 
