@@ -98,15 +98,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  #username-input{
-    label{
-      font-weight: 600px;
-    }
-    input{
-      width: 15%;
-      padding: 5px;
-      border-radius: 3px;
-      border: 1px solid;
-    }
-  }
 </style>

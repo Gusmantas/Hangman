@@ -2,6 +2,7 @@
   <div id="username-input">
     <label for="username">Please enter player name: </label>
     <input
+      @keyup.enter="submitPlayerName"
       v-model="playerName"
       name="username"
       type="text"
@@ -31,8 +32,18 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 button {
   margin-left: 10px;
+  padding: 5px;
+}
+#username-input {
+  label {
+    font-weight: 900px;
+  }
+  input {
+    width: 15%;
+    padding: 5px;
+  }
 }
 </style>
