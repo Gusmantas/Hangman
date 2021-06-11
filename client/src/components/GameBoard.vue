@@ -1,14 +1,19 @@
 <template>
-  <div>
-    <h1>GameBoard</h1>
-    <div id="secret-word">
-      <h1 v-for="(value, i) in gameWordLetters" :key="i">
-        {{ value }}
-      </h1>
+  <main>
+    <div v-if="!playerHasWon">
+      <h1>GameBoard</h1>
+      <div id="secret-word">
+        <h1 v-for="(value, i) in gameWordLetters" :key="i">
+          {{ value }}
+        </h1>
+      </div>
+      <keyboard @validateLetter="validateLetter" />
     </div>
-
-    <keyboard @validateLetter="validateLetter" />
-  </div>
+    <span v-if="playerHasWon">
+      <h3>Congrats! You win!</h3>
+      <button @click="changeStep">Play Again?</button>
+    </span>
+  </main>
 </template>
 
 <script>
@@ -22,6 +27,7 @@ export default {
     return {
       playerGuess: "",
       gameWordLetters: [],
+      playerHasWon: false,
     };
   },
   computed: {
@@ -38,7 +44,7 @@ export default {
       this.playerGuess = letter;
       this.gameWord.includes(this.playerGuess)
         ? this.unmaskLetter(this.playerGuess)
-        : this.decreaseChancesLeft();
+        : this.decreaseChances();
     },
     unmaskLetter(playerGuess) {
       let indices = [];
@@ -46,13 +52,18 @@ export default {
         if (this.gameWord[i] === playerGuess) indices.push(i);
       }
 
-      for(let indice of indices){
+      for (let indice of indices) {
         this.gameWordLetters[indice] = playerGuess.toUpperCase();
       }
+
+      if (!this.gameWordLetters.includes("_")) this.playerHasWon = true;
     },
 
-    decreaseChancesLeft() {
+    decreaseChances() {
       console.log("fail");
+    },
+     changeStep() {
+      this.$emit("nextStep", "UserControls");
     },
   },
 };
