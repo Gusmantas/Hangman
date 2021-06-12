@@ -1,0 +1,28 @@
+@import './mixins';
+@import './variables';
+
+button {
+  padding: 5px;
+}
+#username-input {
+  @include alignElements(column);
+  align-items: center;
+  label {
+    font-size: 0.9em;
+  }
+  input {
+    margin-top: 3px;
+    align-self: center;
+    padding: 5px;
+  }
+  button{
+    @include buttonStyles($primaryBtnColor, 10px, 10%, $hoverBtnColor);
+    margin-top: 20px;
+    &:disabled{
+      @include disabledButtonStyles();
+    }
+    &:active{
+      @include activeButtonStyles(#c1c1c1);
+    }
+  }
+}

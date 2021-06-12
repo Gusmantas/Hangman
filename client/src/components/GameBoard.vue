@@ -1,25 +1,29 @@
 <template>
   <main>
-    <h1>Guesses left: {{ guessesLeft }}</h1>
-    <div id="content-wrapper" v-if="!playerHasWon && guessesLeft !== 0">
+    <p id="guesses-left">Guesses left: {{ guessesLeft }}</p>
+    <div v-if="!playerHasWon && guessesLeft !== 0">
       <div id="secret-word">
         <h1 v-for="(underscore, i) in maskedLetters" :key="i">
           {{ underscore }}
         </h1>
       </div>
-        <button v-if="gameWord.hint" @click="displayHint">Hint</button>
-        <h3>{{hint}}</h3>
       <keyboard @validateLetter="validateLetter" />
     </div>
-    <span v-if="playerHasWon">
+    <span id="game-won" v-if="playerHasWon">
       <h3>Congrats! You win!</h3>
-      <h3>Secret word was: {{ gameWord.word.toUpperCase() }}</h3>
+      <p>Secret word was: {{ gameWord.word.toUpperCase() }}</p>
       <button @click="changeStep">Play Again?</button>
     </span>
-    <span v-if="guessesLeft === 0">
-      <h1>Oh no! you lost!</h1>
-      <h3>Secret word was: {{ gameWord.word.toUpperCase() }}</h3>
+    <span id="game-lost" v-if="guessesLeft === 0">
+      <h3>Oh no! you lost!</h3>
+      <p>Secret word was: {{ gameWord.word.toUpperCase() }}</p>
       <button @click="changeStep">Play Again?</button>
+    </span>
+    <span id="hint" v-if="!playerHasWon && guessesLeft !== 0">
+      <button id="hint-btn" v-if="gameWord.hint" @click="displayHint">
+        Hint
+      </button>
+      <p v-if="hintDisplayed" id="hint-text">"{{ hint }}"</p>
     </span>
   </main>
 </template>
@@ -37,7 +41,8 @@ export default {
       maskedLetters: [],
       playerHasWon: false,
       guessesLeft: 10,
-      hint: '',
+      hint: "",
+      hintDisplayed: false,
     };
   },
   computed: {
@@ -67,23 +72,16 @@ export default {
       if (!this.maskedLetters.includes("_")) this.playerHasWon = true;
     },
     displayHint() {
+      this.hintDisplayed = !this.hintDisplayed;
       this.hint = this.gameWord.hint;
-      console.log(this.gameWord.hint);
     },
     changeStep() {
-      this.$emit("nextStep", "UserControls");
+      this.$emit("nextStep", "WordSelection");
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-#secret-word {
-  display: flex;
-  justify-content: center;
-  h1 {
-    padding: 15px;
-  }
-}
-
+@import "../scss/gameBoard.scss";
 </style>

@@ -21,32 +21,35 @@ export default {
   data() {
     return {
       alphabet: [
-        "a",
-        "b",
-        "c",
-        "d",
+        "q",
+        "w",
         "e",
+        "r",
+        "t",
+        "y",
+        "u",
+        "i",
+        "o",
+        "p",
+        "å",
+        "a",
+        "s",
+        "d",
         "f",
         "g",
         "h",
-        "i",
         "j",
         "k",
         "l",
-        "m",
-        "n",
-        "o",
-        "p",
-        "q",
-        "r",
-        "s",
-        "t",
-        "u",
-        "v",
-        "w",
-        "x",
-        "y",
+        "ö",
+        "ä",
         "z",
+        "x",
+        "c",
+        "v",
+        "b",
+        "n",
+        "m",
       ],
     };
   },
@@ -54,18 +57,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#letters {
-  display: flex;
-  justify-content: center;
-  button {
-    margin: 0 5px;
-    padding: 15px;
-    border: none;
-    border-radius: 5px;
-
-    &:hover {
-      background-color: rgb(197, 209, 22);
-    }
-  }
-}
+@import "../scss/keyboard.scss";
 </style>

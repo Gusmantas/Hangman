@@ -7,14 +7,14 @@
 </template>
 
 <script>
-import UserControls from "../components/UserControls.vue";
+import WordSelection from "../components/WordSelection.vue";
 import GameBoard from "../components/GameBoard.vue";
 import PlayerNameInput from "../components/PlayerNameInput.vue";
 
 export default {
   name: "Home",
   components: {
-    UserControls,
+    WordSelection,
     GameBoard,
     PlayerNameInput,
   },
@@ -36,8 +36,9 @@ export default {
 
 <style lang="scss" scoped>
 header {
-  font-size: 1.3em;
+  font-size: 1.8em;
   font-weight: bold;
+  font-family: Patua One;
 }
 hr {
   margin-bottom: 30px;

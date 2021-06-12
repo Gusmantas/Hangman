@@ -8,7 +8,7 @@
       type="text"
       placeholder="Player name..."
     />
-    <button @click="submitPlayerName">Submit</button>
+    <button :disabled="!playerName" @click="submitPlayerName">Submit</button>
   </div>
 </template>
 
@@ -26,24 +26,12 @@ export default {
       this.changeStep();
     },
     changeStep() {
-      this.$emit("nextStep", "UserControls");
+      this.$emit("nextStep", "WordSelection");
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-button {
-  margin-left: 10px;
-  padding: 5px;
-}
-#username-input {
-  label {
-    font-weight: 900px;
-  }
-  input {
-    width: 15%;
-    padding: 5px;
-  }
-}
+@import "../scss/playerNameInput.scss";
 </style>

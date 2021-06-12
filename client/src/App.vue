@@ -6,8 +6,9 @@
 
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Patua+One&display=swap');
 #app {
-  font-family: Indie Flower, Helvetica, Arial, sans-serif;
+  font-family: Patua One, Helvetica, Arial, sans-serif;
   font-size: 1.5rem;
   font-weight: bold;
   letter-spacing: 1px;

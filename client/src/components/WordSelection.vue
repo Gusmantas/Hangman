@@ -1,18 +1,28 @@
 <template>
   <main>
-    <div>
-      <h3 id="info">Enter your own word or choose a random existing word:</h3>
+    <header id="info">Enter your own word:</header>
+    <div id="user-entered-word">
       <label for="input-word">Your Word: </label>
-      <input v-model="enteredWord.word" type="text" name="input-word" />
-      <h3>{{ validationError }}</h3>
-      <label for="hint">Hint about the word:</label>
       <input
+        v-model="enteredWord.word"
+        type="text"
+        name="input-word"
+        placeholder="Enter secret word..."
+      />
+      <p id="validation-error">{{ validationError }}</p>
+      <label for="hint">Hint about the word:</label>
+      <textarea
+        rows="5"
         v-model="enteredWord.hint"
         type="text"
-        placeholder="Hint (Optional)"
+        placeholder="Enter hint (optional)..."
       />
-      <button @click="getRandomWord">Random Word</button>
+    </div>
+    <header>Or generate a random word:</header>
+    <div id="buttons">
+      <button id="random-word-btn" @click="getRandomWord">Random Word</button>
       <button
+        id="start-game-btn"
         :disabled="!enteredWord.word && !randomWord.word"
         @click="startGame"
       >
@@ -57,15 +67,16 @@ export default {
         hint: "",
       };
 
+      // Ugly if cases. Tried with ternary, but it was harder to read. Other solutions?
       if (this.enteredWord.word) {
-        if (!this.validateInput(this.enteredWord.word)) {
-          return;
-        }
+        if (!this.validateInput(this.enteredWord.word)) return;
+        this.enteredWord.word = this.enteredWord.word.toLowerCase();
         gameWord = this.enteredWord;
-        // Saving the entered word object in databse so these words can be randomly
+        // Saving the entered word object in database so these words can be randomly
         // used when someone plays the game.
         await this.postWord(gameWord);
       } else gameWord = this.randomWord;
+
       this.$store.commit("setGameWord", gameWord);
       this.changeStep();
     },
@@ -75,7 +86,7 @@ export default {
     },
 
     validateInput(word) {
-      let letters = /^[a-z]*$/i;
+      let letters = /^[a-zäöå]*$/i;
       if (!word.match(letters)) {
         this.validationError = "Only letters are allowed!";
         this.enteredWord.word = null;
@@ -98,4 +109,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../scss/wordSelection.scss";
 </style>
