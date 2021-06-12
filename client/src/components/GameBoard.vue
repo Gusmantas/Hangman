@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <div>
     <p id="guesses-left">Guesses left: {{ guessesLeft }}</p>
     <div v-if="!playerHasWon && guessesLeft !== 0">
       <div id="secret-word">
@@ -14,7 +14,7 @@
       <p>Secret word was: {{ gameWord.word.toUpperCase() }}</p>
       <button class="play-again-btn" @click="changeStep">Play Again?</button>
     </span>
-    <span id="game-lost" v-if="guessesLeft === 0">
+    <span id="game-lost" v-if="guessesLeft === 0" @change="console.log('runs')">
       <h3>Oh no! you lost!</h3>
       <p>Secret word was: {{ gameWord.word.toUpperCase() }}</p>
       <button class="play-again-btn" @click="changeStep">Play Again?</button>
@@ -25,7 +25,7 @@
       </button>
       <p v-if="hintDisplayed" id="hint-text">"{{ hint }}"</p>
     </span>
-  </main>
+  </div>
 </template>
 
 <script>
@@ -49,6 +49,10 @@ export default {
     gameWord() {
       return this.$store.state.gameWord;
     },
+
+    playerName() {
+      return this.$store.state.playerName;
+    },
   },
   created() {
     this.maskedLetters = [...this.gameWord.word].map(() => "_");
@@ -69,14 +73,37 @@ export default {
         this.maskedLetters[indice] = playerGuess.toUpperCase();
       }
 
-      if (!this.maskedLetters.includes("_")) this.playerHasWon = true;
+      if (!this.maskedLetters.includes("_")) {
+        this.playerHasWon = true;
+        this.postScore("WON");
+      }
     },
     displayHint() {
       this.hintDisplayed = !this.hintDisplayed;
       this.hint = this.gameWord.hint;
     },
+
+    async postScore(status) {
+      const newScore = {
+        username: this.playerName,
+        last_game_score: status,
+      };
+      let score = await fetch("api/v1/scores", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newScore),
+      });
+      await score.json();
+    },
     changeStep() {
       this.$emit("nextStep", "WordSelection");
+    },
+  },
+  watch: {
+    guessesLeft: function () {
+      if (this.guessesLeft === 0) {
+        this.postScore("LOST");
+      }
     },
   },
 };

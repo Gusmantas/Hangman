@@ -1,7 +1,7 @@
 <template>
   <nav>
     <router-link to="/">Play</router-link>
-    <router-link to="/last-games">Last 10 Games</router-link>
+    <router-link to="/last-games">Scoreboard</router-link>
   </nav>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <div>
     <header id="info">Enter your own word:</header>
     <div id="user-entered-word">
       <label for="input-word">Your Word: </label>
@@ -29,7 +29,7 @@
         Start Game!
       </button>
     </div>
-  </main>
+  </div>
 </template>
 
 <script>
@@ -101,8 +101,7 @@ export default {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(word),
       });
-      postWord = await postWord.json();
-      console.log(postWord);
+      await postWord.json();
     },
   },
 };

@@ -27,6 +27,12 @@ export default createStore({
       words = await words.json();
       context.commit("setWords", words);
     },
+
+    async getScores(context) {
+      let scores = await fetch("api/v1/scores");
+      scores = await scores.json();
+      context.commit("setScores", scores)
+    }
   },
   modules: {},
 });
