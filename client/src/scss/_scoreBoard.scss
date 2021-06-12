@@ -1,17 +1,16 @@
 @import "./variables";
 @import "./mixins";
 
-#score-card{
+#score-card {
   @include scoreBoardStyles(0.6em);
-  border: 0.5px solid $headerColor;
+  border: 0.5px solid $primaryColor;
   border-radius: 3px;
   padding: 5px;
   margin-top: 10px;
-  #playername{
-    color: $headerColor
+  #playername {
+    color: $primaryColor;
   }
 }
-
 
 #scoreboard-titles {
   @include scoreBoardStyles(0.8em);
@@ -19,7 +18,7 @@
 
 #spinner {
   border: 5px solid #f3f3f3;
-  border-top: 5px solid $headerColor;
+  border-top: 5px solid $primaryColor;
   border-radius: 50%;
   width: 60px;
   height: 60px;
@@ -28,6 +27,10 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

@@ -30,7 +30,7 @@
 
 @mixin activeButtonStyles() {
   background: #e5e5e5;
-  box-shadow: inset 0px 0px 5px $headerColor;
+  box-shadow: inset 0px 0px 5px $primaryColor;
   outline: none;
   transition: none;
 }

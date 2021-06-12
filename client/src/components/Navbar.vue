@@ -1,14 +1,12 @@
 <template>
   <nav>
     <router-link to="/">Play</router-link>
-    <router-link to="/last-games">Scoreboard</router-link>
+    <router-link to="/scoreboard">Scoreboard</router-link>
   </nav>
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <style lang="scss" scoped>

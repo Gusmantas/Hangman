@@ -1,9 +1,8 @@
 <template>
   <div id="score-card">
     <p id="playername">{{ score.username }}</p>
-    <p id="score-date">{{ new Date(score.timestamp).toLocaleDateString() }}</p>
+    <p>{{ new Date(score.timestamp).toLocaleDateString() }}</p>
     <p
-      id="lost-won"
       :style="[
         score.last_game_score === 'WON' ? { color: 'green' } : { color: 'red' },
       ]"

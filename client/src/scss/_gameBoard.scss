@@ -1,5 +1,5 @@
-@import './variables';
-@import './mixins';
+@import "./variables";
+@import "./mixins";
 
 #secret-word {
   display: flex;
@@ -8,19 +8,19 @@
     padding: 15px;
   }
 }
-#guesses-left{
-  color: $headerColor;
+#guesses-left {
+  color: $primaryColor;
 }
 
-#hint-btn{
+#hint-btn {
   @include buttonStyles($primaryBtnColor, 10px, 10%, $hoverBtnColor);
   margin-top: 50px;
-  &:active{
+  &:active {
     @include activeButtonStyles();
   }
 }
 
-#hint-text{
+#hint-text {
   margin: 15px auto;
   max-width: 30%;
   color: green;
@@ -32,9 +32,9 @@
   background-color: whitesmoke;
 }
 
-.play-again-btn{
+.play-again-btn {
   @include buttonStyles($primaryBtnColor, 10px, 10%, $hoverBtnColor);
-  &:active{
+  &:active {
     @include activeButtonStyles();
   }
 }

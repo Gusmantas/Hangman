@@ -35,6 +35,15 @@ export default {
   components: {
     Keyboard,
   },
+  computed: {
+    gameWord() {
+      return this.$store.state.gameWord;
+    },
+
+    playerName() {
+      return this.$store.state.playerName;
+    },
+  },
   data() {
     return {
       playerGuess: "",
@@ -44,15 +53,6 @@ export default {
       hint: "",
       hintDisplayed: false,
     };
-  },
-  computed: {
-    gameWord() {
-      return this.$store.state.gameWord;
-    },
-
-    playerName() {
-      return this.$store.state.playerName;
-    },
   },
   created() {
     this.maskedLetters = [...this.gameWord.word].map(() => "_");
@@ -69,6 +69,7 @@ export default {
       for (let i = 0; i < this.gameWord.word.length; i++) {
         if (this.gameWord.word[i] === playerGuess) indices.push(i);
       }
+
       for (let indice of indices) {
         this.maskedLetters[indice] = playerGuess.toUpperCase();
       }
@@ -99,6 +100,8 @@ export default {
       this.$emit("nextStep", "WordSelection");
     },
   },
+  // Is it wise to use watchers in this case? They are quite "expensive"...
+  // I needed it to determine if user has lost. There was no other way to do it.
   watch: {
     guessesLeft: function () {
       if (this.guessesLeft === 0) {

@@ -1,20 +1,19 @@
 @import "./variables";
 
-nav{
+nav {
   margin: 20px 0 60px 0;
   border: none;
-  box-shadow: 0 5px 4px 0.5px $headerColor;
+  box-shadow: 0 5px 4px 0.5px $primaryColor;
   padding: 10px;
 
-  a{
+  a {
     width: 100px;
     margin: 0 30px;
     text-decoration: none;
-    color: $headerColor;
-    &:hover{
-      text-shadow: 0 0 3px #2C3E50, 0 0px black, 0 2px #2C3E50;
+    color: $primaryColor;
+    &:hover {
+      text-shadow: 0 0 3px #2c3e50, 0 0px black, 0 2px #2c3e50;
       transition: 0.5s;
     }
   }
-
 }

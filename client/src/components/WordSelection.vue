@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header id="info">Enter your own word:</header>
+    <p class="info">Enter your own word:</p>
     <div id="user-entered-word">
       <label for="input-word">Your Word: </label>
       <input
@@ -18,7 +18,7 @@
         placeholder="Enter hint (optional)..."
       />
     </div>
-    <header>Or generate a random word:</header>
+    <p class="info">Or generate a random word:</p>
     <div id="buttons">
       <button id="random-word-btn" @click="getRandomWord">Random Word</button>
       <button
@@ -34,6 +34,11 @@
 
 <script>
 export default {
+  computed: {
+    words() {
+      return this.$store.state.words;
+    },
+  },
   data() {
     return {
       enteredWord: {
@@ -46,12 +51,6 @@ export default {
       },
       validationError: "",
     };
-  },
-
-  computed: {
-    words() {
-      return this.$store.state.words;
-    },
   },
   methods: {
     getRandomWord() {
@@ -73,7 +72,7 @@ export default {
         this.enteredWord.word = this.enteredWord.word.toLowerCase();
         gameWord = this.enteredWord;
         // Saving the entered word object in database so these words can be randomly
-        // used when someone plays the game.
+        // used when someone else plays the game.
         await this.postWord(gameWord);
       } else gameWord = this.randomWord;
 

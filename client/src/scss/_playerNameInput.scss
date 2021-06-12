@@ -1,5 +1,5 @@
-@import './mixins';
-@import './variables';
+@import "./mixins";
+@import "./variables";
 
 button {
   padding: 5px;
@@ -16,13 +16,13 @@ button {
     align-self: center;
     padding: 5px;
   }
-  button{
+  button {
     @include buttonStyles($primaryBtnColor, 10px, 10%, $hoverBtnColor);
     margin-top: 20px;
-    &:disabled{
+    &:disabled {
       @include disabledButtonStyles();
     }
-    &:active{
+    &:active {
       @include activeButtonStyles();
     }
   }

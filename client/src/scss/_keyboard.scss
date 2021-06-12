@@ -16,7 +16,7 @@
       background-color: rgb(197, 209, 22);
     }
     &:active {
-     @include activeButtonStyles();
+      @include activeButtonStyles();
     }
   }
 }

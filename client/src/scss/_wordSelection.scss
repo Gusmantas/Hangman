@@ -20,8 +20,8 @@
     color: red;
   }
 }
-header {
-  color: $headerColor;
+.info {
+  color: $primaryColor;
   font-size: 1.3em;
 }
 
@@ -33,7 +33,7 @@ header {
 
 #random-word-btn {
   @include buttonStyles($primaryBtnColor, 10px, 10%, $hoverBtnColor);
-  &:active{
+  &:active {
     @include activeButtonStyles();
     transition: none;
   }
@@ -45,10 +45,10 @@ header {
   outline: grey;
   box-shadow: 0 0 0 0 green;
   animation: pulse 1s infinite cubic-bezier(0.66, 0, 0, 1);
-  &:disabled{
-   @include disabledButtonStyles();
+  &:disabled {
+    @include disabledButtonStyles();
   }
-  &:active{
+  &:active {
     @include activeButtonStyles();
   }
   @keyframes pulse {
@@ -57,4 +57,3 @@ header {
     }
   }
 }
-
