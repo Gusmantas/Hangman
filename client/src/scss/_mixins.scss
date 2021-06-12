@@ -1,0 +1,44 @@
+@import "./variables";
+
+@mixin alignElements($direction) {
+  display: flex;
+  flex-direction: $direction;
+}
+
+@mixin buttonStyles($color, $padding, $width, $hoverColor) {
+  width: $width;
+  color: white;
+  border-radius: 100px;
+  padding: $padding;
+  background-color: $color;
+  font-family: Patua One;
+  cursor: pointer;
+  border: none;
+  &:hover {
+    background-color: $hoverColor;
+    transition: 0.6s;
+  }
+}
+
+@mixin disabledButtonStyles() {
+  box-shadow: none;
+  color: rgba(128, 128, 128, 0.507);
+  background-color: #daddf7;
+  border: 1px solid;
+  cursor: auto;
+}
+
+@mixin activeButtonStyles() {
+  background: #e5e5e5;
+  box-shadow: inset 0px 0px 5px $headerColor;
+  outline: none;
+  transition: none;
+}
+
+@mixin scoreBoardStyles($fontSize) {
+  display: flex;
+  justify-content: space-between;
+  width: 30%;
+  margin: 0 auto;
+  font-size: $fontSize;
+}

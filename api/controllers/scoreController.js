@@ -12,8 +12,7 @@ const getAllScores = (req, res) => {
 
 const postScore = (req, res) => {
   req.body.timestamp = Date.now()
-
-  const query = /*sql*/ `INSERT INTO scores(username, last_game_score, timestamp) VALUES($username, $lastGameScore, $timestamp)`
+  const query = /*sql*/ `INSERT INTO scores(username, last_game_score, timestamp) VALUES($username, $last_game_score, $timestamp)`
   let params = {};
   for (let key in req.body) {
     params["$" + key] = req.body[key];

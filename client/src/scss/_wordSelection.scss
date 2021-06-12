@@ -1,0 +1,60 @@
+@import "./mixins";
+@import "./variables";
+
+#user-entered-word {
+  @include alignElements(column);
+  width: 50%;
+  margin: 10px auto 40px auto;
+  input,
+  textarea {
+    width: 40%;
+    align-self: center;
+    padding: 5px;
+  }
+  label {
+    font-size: 0.7em;
+  }
+  #validation-error {
+    margin: 3px 0 8px 0;
+    font-size: 0.5em;
+    color: red;
+  }
+}
+header {
+  color: $headerColor;
+  font-size: 1.3em;
+}
+
+#buttons {
+  @include alignElements(column);
+  align-items: center;
+  margin-top: 10px;
+}
+
+#random-word-btn {
+  @include buttonStyles($primaryBtnColor, 10px, 10%, $hoverBtnColor);
+  &:active{
+    @include activeButtonStyles();
+    transition: none;
+  }
+}
+
+#start-game-btn {
+  @include buttonStyles(rgba(0, 128, 0, 0.418), 15px, 20%, rgb(0, 128, 0));
+  margin-top: 80px;
+  outline: grey;
+  box-shadow: 0 0 0 0 green;
+  animation: pulse 1s infinite cubic-bezier(0.66, 0, 0, 1);
+  &:disabled{
+   @include disabledButtonStyles();
+  }
+  &:active{
+    @include activeButtonStyles();
+  }
+  @keyframes pulse {
+    to {
+      box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);
+    }
+  }
+}
+
