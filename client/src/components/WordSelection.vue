@@ -20,13 +20,13 @@
     </div>
     <p class="info">Or generate a random word:</p>
     <div id="buttons">
-      <button id="random-word-btn" @click="getRandomWord">Random Word</button>
+      <button id="random-word-btn" @click="getRandomWord">RANDOM WORD</button>
       <button
         id="start-game-btn"
         :disabled="!enteredWord.word && !randomWord.word"
         @click="startGame"
       >
-        Start Game!
+        START GAME!
       </button>
     </div>
   </div>

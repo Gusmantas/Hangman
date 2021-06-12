@@ -8,7 +8,7 @@
       type="text"
       placeholder="Player name..."
     />
-    <button :disabled="!playerName" @click="submitPlayerName">Submit</button>
+    <button :disabled="!playerName" @click="submitPlayerName">SUBMIT</button>
   </div>
 </template>
 
