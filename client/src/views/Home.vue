@@ -1,7 +1,5 @@
 <template>
   <main>
-    <header>Are you ready to get hanged?</header>
-    <hr />
     <component @nextStep="changeStep" :is="selectedComponent"> </component>
   </main>
 </template>
@@ -33,14 +31,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-header {
-  font-size: 1.8em;
-  font-weight: bold;
-  font-family: Patua One;
-}
-hr {
-  margin-bottom: 30px;
-}
-</style>

@@ -8,7 +8,8 @@ button {
   @include alignElements(column);
   align-items: center;
   label {
-    font-size: 0.9em;
+    font-size: 0.7em;
+    margin-bottom: 3px;
   }
   input {
     margin-top: 3px;
@@ -22,7 +23,7 @@ button {
       @include disabledButtonStyles();
     }
     &:active{
-      @include activeButtonStyles(#c1c1c1);
+      @include activeButtonStyles();
     }
   }
 }

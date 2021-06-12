@@ -12,12 +12,12 @@
     <span id="game-won" v-if="playerHasWon">
       <h3>Congrats! You win!</h3>
       <p>Secret word was: {{ gameWord.word.toUpperCase() }}</p>
-      <button @click="changeStep">Play Again?</button>
+      <button class="play-again-btn" @click="changeStep">Play Again?</button>
     </span>
     <span id="game-lost" v-if="guessesLeft === 0">
       <h3>Oh no! you lost!</h3>
       <p>Secret word was: {{ gameWord.word.toUpperCase() }}</p>
-      <button @click="changeStep">Play Again?</button>
+      <button class="play-again-btn" @click="changeStep">Play Again?</button>
     </span>
     <span id="hint" v-if="!playerHasWon && guessesLeft !== 0">
       <button id="hint-btn" v-if="gameWord.hint" @click="displayHint">

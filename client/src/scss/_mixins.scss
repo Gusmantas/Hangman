@@ -1,3 +1,5 @@
+@import "./variables";
+
 @mixin alignElements($direction) {
   display: flex;
   flex-direction: $direction;
@@ -26,9 +28,9 @@
   cursor: auto;
 }
 
-@mixin activeButtonStyles($color) {
+@mixin activeButtonStyles() {
   background: #e5e5e5;
-  box-shadow: inset 0px 0px 5px $color;
+  box-shadow: inset 0px 0px 5px $headerColor;
   outline: none;
   transition: none;
 }
